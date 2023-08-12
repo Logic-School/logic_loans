@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="faculty_details_basic_view_inherit" model="ir.ui.view">
+        <field name="name">student.form.inherit</field>
+        <field name="model">logic.students</field>
+        <field name="inherit_id" ref="logic_base.faculty_details_basic_view"/>
+        <field name="arch" type="xml">
+            <xpath expr='//field[@name="name"]' position="after">
+                <field name="gender"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

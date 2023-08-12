@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <template id="report_loan_letter">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t>
+                    <div class="page">
+                        <style>
+                            p {
+                                font-size: 18px;
+                            }
+                            table {
+                              font-family: arial, sans-serif;
+                              border-collapse: collapse;
+                              width: 100%;
+                            }
+                            
+                            td, th {
+                              font-size: 18px;
+                              border: 2px solid #dddddd;
+                              text-align: left;
+                              padding: 6px;
+                            }
+                            
+                            </style>
+                        <div class="row page" style="page-break-after: always">
+                        <p class="oe_left" t-field="o.location"/>
+                        <p class="oe_left" t-field="o.date"/>
+                        <br/>
+                        <h2 align="center"><u>To Whom-so-ever It May Concern</u></h2>
+                        <p style="line-height: 2;">This is to certify that <b>
+                            <span t-field="o.title"/>. 
+                            <span t-field="o.student_name"/></b>
+                            D/o of <b>Mr. <span t-field="o.father_name"/></b>, 
+                            <span t-field="o.address"/>
+                            is a registered student of 
+                            <b>Logic Management Training Institutes Pvt. Ltd</b> under the brand name <b>Logic School of Management</b>. 
+                        </p>
+                        <p style="line-height: 2;">
+                            She has taken admission for <b><span t-field="o.course_abbrv"/></b> course affiliated to the
+                            <b><span t-field="o.course_body"/></b>
+                        </p>
+                        <p style="line-height: 2;">
+                            The details of the fee structure for <b><span t-field="o.course_name"/></b> course are as follows;
+                        </p>
+                        
+
+                        <table>
+                            <!-- In case we want to repeat the header, remove "display: table-row-group" -->
+                            <thead style="display: table-row-group">
+                                <tr>
+                                    <!-- added header to display indexes -->
+                                    <th name="th_index" class="text-start">SL No</th>
+                                    <th name="th_description" class="text-start">Particulars</th>
+                                    <th name="th_quantity" class="text-end">Amount</th>
+                                </tr>
+                            </thead>
+
+                            <tbody class="sale_tbody">
+                                <!-- added variable 'index' to increment index on each iteration -->
+                                <t t-set = "index" t-value="1"/>
+        
+                                <t t-foreach="o.fee_structure_lines" t-as="line">
+                                    <tr>
+                                        <td name="td_index"><span t-esc="index"/>.</td>
+                                        <td name="td_name"><span t-field="line.particular"/></td>
+                                        <td name="td_amount" class="text-center">
+                                            <span t-field="line.amount"/>
+                                        </td>
+                                    </tr>
+                                    <t t-set="index" t-value="index+1"/>
+                                </t>
+                                <tr>
+                                    <td></td>
+                                    <td name="td_name"><span><b>Total</b></span></td>
+                                    <td name="td_total" class="text-center">
+                                        <b><span t-field="o.amount"/></b>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                        <div class="row" style="line-height: 2;">
+                            <p><b>Note:</b></p>
+                            <p>*Logic Admission fee and Tuition fee has to be paid to Logic Management Training Institutes Pvt. Ltd. Kochi. </p>
+                            <p>
+                                <span>Account Holder: LOGIC MANAGEMENT TRAINING INSTITUTES PVT LTD</span><br/>
+                                <span>Account number: 50200000093791</span><br/>
+                                <span>IFSC Code: HDFC0000510</span><br/>
+                                <span>Bank: HDFC</span><br/>
+                                <span>Place : BANERJI ROAD</span><br/>
+                            </p>
+                            <p>**Price of Study Material &amp; Software has to be paid to:</p>
+                            <p>
+                                <span>Account Holder Name : Venus Books</span><br/>
+                                <span>Account number: 0228073000001713</span><br/>
+                                <span>IFSC Code: SIBL0000228</span><br/>
+                                <span>Bank: South Indian Bank Ltd</span><br/>
+                                <span>Branch: Palarivattom</span><br/> 
+                            </p>
+                            <p>*** IMA Membership Fee, Entrance Fee and Exam Fee has to be paid directly to IMA, online or through credit card.</p>
+                            <p>***Actual amount may vary according to Foreign Exchange fluctuations.</p>
+                            <br/>
+                            <br/>
+                            <p>For Logic Management Training Institutes Pvt Ltd,</p>
+                            <p><span t-field="o.academic_head_name"/></p>
+                            <p>Academic Head</p>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <record id="action_loan_letter_report" model="ir.actions.report">
+        <field name="name">Loan Letter</field>
+        <field name="model">loan.letter</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">logic_loans.report_loan_letter</field>
+        <field name="report_file">logic_loans.report_loan_letter</field>
+        <field name="print_report_name">'Loan Letter - %s' % (object.student_name)</field>
+        <field name="binding_model_id" ref="model_loan_letter"/>
+     </record>
+</odoo>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record model="ir.actions.act_window" id="details_loan_letter_action">
+        <field name="name">Loan Letter</field>
+        <field name="res_model">loan.letter</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="Loans" id="menu_loan_parent"
+              action="details_loan_letter_action"
+              sequence="6"
+              />
+    <menuitem name="Loan Letters" id="menu_loan_letter"
+              action="details_loan_letter_action"
+              parent="menu_loan_parent"
+              sequence="1"
+              />
+
+
+    <record id="loan_letter_form_view" model="ir.ui.view">
+        <field name="name">loan.letter.form</field>
+        <field name="model">loan.letter</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Exam">
+                <sheet>
+                    <group>
+                        <group>
+                            <h3><u>Body</u></h3>
+                            <field name="currency_id" invisible="1"/>
+                            <field name="academic_head_id"/>
+                            <field name="academic_head_name"/>
+                            <field name="student_id"/>
+                            <field name="student_name"/>
+                            <field name="title"/>
+                            <field name="address"/>
+                            <field name="father_name"/>
+                        <!-- </group>
+                        <group> -->
+                            <field name="course_name"/>
+                            <field name="course_body"/>
+                            <field name="course_abbrv"/>
+                        </group>
+                        <group>
+                            <h3><u>Header</u></h3>
+                            <field name="location"/>
+                            <field name="date"/> 
+                        </group>
+                    </group>
+                    <group>
+                        <notebook>
+                            <page string="Fee Structure">
+                                <field name="fee_structure_lines">
+                                    <tree editable="bottom">
+                                        <field name="currency_id" invisible="1"/>
+                                        <field name="particular"/>
+                                        <field name="amount"/>
+                                    </tree>
+                                </field>
+                                <group name="note_group" col="6" class="mt-2 mt-md-0">
+                                    <group class="oe_subtotal_footer oe_right" colspan="2">
+                                        <div class="oe_subtotal_footer_separator oe_inline o_td_label">
+                                            <label for="amount"/>
+                                        </div>
+                                        <field name="amount" nolabel="1" class="oe_subtotal_footer_separator" widget="monetary"/>
+                                    </group>
+                                    <div class="oe_clear"/>
+                                </group>
+                            </page>
+                        </notebook>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>
