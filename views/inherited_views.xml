@@ -10,4 +10,15 @@
             </xpath>
         </field>
     </record>
+
+    <record id="company_form_inherit" model="ir.ui.view">
+        <field name="name">company.form.inherit</field>
+        <field name="model">res.company</field>
+        <field name="inherit_id" ref="base.view_company_form"/>
+        <field name="arch" type="xml">
+            <xpath expr='//field[@name="favicon"]' position="after">
+                <field name="company_seal" widget="image" style="height:100px;width:100px;"/>
+            </xpath>
+        </field>
+    </record> 
 </odoo>

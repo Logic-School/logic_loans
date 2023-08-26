@@ -10,6 +10,7 @@
     <menuitem name="Loans" id="menu_loan_parent"
               action="details_loan_letter_action"
               sequence="6"
+              web_icon="logic_loans/static/description/icon.png"
               />
     <menuitem name="Loan Letters" id="menu_loan_letter"
               action="details_loan_letter_action"
@@ -17,6 +18,17 @@
               sequence="1"
               />
 
+    <record id="loan_letter_tree_view" model="ir.ui.view">
+        <field name="name">loan.letter.tree</field>
+        <field name="model">loan.letter</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="student_name"/>
+                <field name="course_name"/>
+            </tree>
+        </field>
+    </record>
 
     <record id="loan_letter_form_view" model="ir.ui.view">
         <field name="name">loan.letter.form</field>

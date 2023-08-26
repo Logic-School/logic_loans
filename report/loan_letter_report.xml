@@ -24,8 +24,11 @@
                             }
                             
                             </style>
-                        <div class="row page" style="page-break-after: always">
-                        <p class="oe_left" t-field="o.location"/>
+                        <div class="row page"  style="page-break-after: always;">
+                            <div align="center"><img t-if="o.company_id.logo" t-att-src="image_data_uri(o.company_id.logo)"
+                            style="max-height: 100px;" alt="Logo" />
+                            </div>
+                            <p class="oe_left" t-field="o.location"/>
                         <p class="oe_left" t-field="o.date"/>
                         <br/>
                         <h2 align="center"><u>To Whom-so-ever It May Concern</u></h2>
@@ -81,32 +84,36 @@
                             </tbody>
                         </table>
                     </div>
-                        <div class="row" style="line-height: 2;">
-                            <p><b>Note:</b></p>
-                            <p>*Logic Admission fee and Tuition fee has to be paid to Logic Management Training Institutes Pvt. Ltd. Kochi. </p>
-                            <p>
-                                <span>Account Holder: LOGIC MANAGEMENT TRAINING INSTITUTES PVT LTD</span><br/>
-                                <span>Account number: 50200000093791</span><br/>
-                                <span>IFSC Code: HDFC0000510</span><br/>
-                                <span>Bank: HDFC</span><br/>
-                                <span>Place : BANERJI ROAD</span><br/>
-                            </p>
-                            <p>**Price of Study Material &amp; Software has to be paid to:</p>
-                            <p>
-                                <span>Account Holder Name : Venus Books</span><br/>
-                                <span>Account number: 0228073000001713</span><br/>
-                                <span>IFSC Code: SIBL0000228</span><br/>
-                                <span>Bank: South Indian Bank Ltd</span><br/>
-                                <span>Branch: Palarivattom</span><br/> 
-                            </p>
-                            <p>*** IMA Membership Fee, Entrance Fee and Exam Fee has to be paid directly to IMA, online or through credit card.</p>
-                            <p>***Actual amount may vary according to Foreign Exchange fluctuations.</p>
-                            <br/>
-                            <br/>
-                            <p>For Logic Management Training Institutes Pvt Ltd,</p>
-                            <p><span t-field="o.academic_head_name"/></p>
-                            <p>Academic Head</p>
-                        </div>
+                    <div class="row" style="line-height: 2;">
+                        <p><b>Note:</b></p>
+                        <p>*Logic Admission fee and Tuition fee has to be paid to Logic Management Training Institutes Pvt. Ltd. Kochi. </p>
+                        <p>
+                            <span>Account Holder: LOGIC MANAGEMENT TRAINING INSTITUTES PVT LTD</span><br/>
+                            <span>Account number: 50200000093791</span><br/>
+                            <span>IFSC Code: HDFC0000510</span><br/>
+                            <span>Bank: HDFC</span><br/>
+                            <span>Place : BANERJI ROAD</span><br/>
+                        </p>
+                        <p>**Price of Study Material &amp; Software has to be paid to:</p>
+                        <p>
+                            <span>Account Holder Name : Venus Books</span><br/>
+                            <span>Account number: 0228073000001713</span><br/>
+                            <span>IFSC Code: SIBL0000228</span><br/>
+                            <span>Bank: South Indian Bank Ltd</span><br/>
+                            <span>Branch: Palarivattom</span><br/> 
+                        </p>
+                        <p>*** IMA Membership Fee, Entrance Fee and Exam Fee has to be paid directly to IMA, online or through credit card.</p>
+                        <p>***Actual amount may vary according to Foreign Exchange fluctuations.</p>
+                        <br/>
+                        <br/>
+                        <p>For Logic Management Training Institutes Pvt Ltd,</p>
+                        <p><span t-field="o.academic_head_name"/></p>
+                        <p>Academic Head</p>
+                    </div>
+                    <div class="mb-0 py-2"  style="min-height: 165px; margin-top:0px;">
+                        <img t-if="o.company_id.company_seal" t-att-src="image_data_uri(o.company_id.company_seal)"
+                            style="min-height:160px; max-height:160px; float:right;" alt="Logo" />
+                    </div>
                     </div>
                 </t>
             </t>
@@ -119,6 +126,7 @@
         <field name="report_type">qweb-pdf</field>
         <field name="report_name">logic_loans.report_loan_letter</field>
         <field name="report_file">logic_loans.report_loan_letter</field>
+        <field name="paperformat_id" ref="logic_loans.paperformat_logic" />
         <field name="print_report_name">'Loan Letter - %s' % (object.student_name)</field>
         <field name="binding_model_id" ref="model_loan_letter"/>
      </record>

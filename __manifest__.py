@@ -8,6 +8,7 @@
         'security/ir.model.access.csv',
         'views/loan_letter_views.xml',
         'views/inherited_views.xml',
+        'report/custom_paperformat.xml',
         'report/loan_letter_report.xml',
 
     ],
