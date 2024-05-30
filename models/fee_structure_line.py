@@ -17,3 +17,7 @@ class FeeStructureLine(models.Model):
     particular = fields.Text(string="Particular")
     amount = fields.Monetary(string="Amount")
     loan_letter_id = fields.Many2one('loan.letter')
+    display_type = fields.Selection([
+        ('line_section', "Section"),
+        ('line_note', "Note")], default=False, help="Technical field for UX purpose.")
+    name = fields.Char(string="Particular")

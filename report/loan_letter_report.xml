@@ -6,114 +6,198 @@
             <t t-foreach="docs" t-as="o">
                 <t>
                     <div class="page">
+                        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Trirong"/>
+
                         <style>
+                            @import
+                            url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900")
                             p {
-                                font-size: 18px;
+                            font-size: 18px;
+                            font-family: "Tinos", serif;
                             }
                             table {
-                              font-family: arial, sans-serif;
-                              border-collapse: collapse;
-                              width: 100%;
+                            border-collapse: collapse;
+                            width: 100%;
+                            font-family: "Tinos", serif;
                             }
-                            
+
                             td, th {
-                              font-size: 18px;
-                              border: 2px solid #dddddd;
-                              text-align: left;
-                              padding: 6px;
+                            font-size: 18px;
+                            border: 1px solid #0a0a0a;
+                            text-align: left;
+                            padding: 4px;
+                            font-family: "Tinos", serif;
                             }
-                            
-                            </style>
-                        <div class="row page"  style="page-break-after: always;">
-                            <div align="center"><img t-if="o.company_id.logo" t-att-src="image_data_uri(o.company_id.logo)"
-                            style="max-height: 100px;" alt="Logo" />
-                            </div>
-                            <p class="oe_left" t-field="o.location"/>
-                        <p class="oe_left" t-field="o.date"/>
-                        <br/>
-                        <h2 align="center"><u>To Whom-so-ever It May Concern</u></h2>
-                        <p style="line-height: 2;">This is to certify that <b>
-                            <span t-field="o.title"/>. 
-                            <span t-field="o.student_name"/></b>
-                            D/o of <b>Mr. <span t-field="o.father_name"/></b>, 
-                            <span t-field="o.address"/>
-                            is a registered student of 
-                            <b>Logic Management Training Institutes Pvt. Ltd</b> under the brand name <b>Logic School of Management</b>. 
-                        </p>
-                        <p style="line-height: 2;">
-                            She has taken admission for <b><span t-field="o.course_abbrv"/></b> course affiliated to the
-                            <b><span t-field="o.course_body"/></b>
-                        </p>
-                        <p style="line-height: 2;">
-                            The details of the fee structure for <b><span t-field="o.course_name"/></b> course are as follows;
-                        </p>
-                        
 
-                        <table>
-                            <!-- In case we want to repeat the header, remove "display: table-row-group" -->
-                            <thead style="display: table-row-group">
-                                <tr>
-                                    <!-- added header to display indexes -->
-                                    <th name="th_index" class="text-start">SL No</th>
-                                    <th name="th_description" class="text-start">Particulars</th>
-                                    <th name="th_quantity" class="text-end">Amount</th>
-                                </tr>
-                            </thead>
+                            h2, h3 {
+                            font-family: "Tinos", serif;
+                            }
 
-                            <tbody class="sale_tbody">
-                                <!-- added variable 'index' to increment index on each iteration -->
-                                <t t-set = "index" t-value="1"/>
-        
-                                <t t-foreach="o.fee_structure_lines" t-as="line">
+                        </style>
+                        <div class="row page" style="page-break-after: always;">
+                            <p>
+                                <span class="oe_left" t-field="o.location"/>
+                                <br/>
+                                <span class="oe_left" t-field="o.date"/>
+                            </p>
+                            <br/>
+                            <h2 align="center">
+                                <u>To Whom-so-ever It May Concern</u>
+                            </h2>
+                            <p style="line-height: 2;">This is to certify that
+                                <b>
+                                    <span t-field="o.title"/>.
+                                    <span t-field="o.student_name"/>
+                                </b>
+                                D/o of
+                                <b>Mr.
+                                    <span t-field="o.father_name"/>
+                                </b>
+                                ,
+                                <span t-field="o.address"/>
+                                is a registered student of
+                                <b>Logic Management Training Institutes Pvt. Ltd</b>
+                                under the brand name <b>Logic School of Management</b>.
+                            </p>
+                            <p style="line-height: 2;">
+                                She/he has taken admission for
+                                <b>
+                                    <span t-field="o.course_abbrv"/>
+                                </b>
+                                course affiliated with the
+                                <b>
+                                    <span t-field="o.course_body"/>
+                                </b>
+                            </p>
+                            <p style="line-height: 2;">
+                                <!--                                The details of the fee structure for-->
+                                <!--                                <b>-->
+                                <!--                                    <span t-field="o.course_name"/>-->
+                                <!--                                </b>-->
+                                Fee Details:
+                            </p>
+
+
+                            <table>
+                                <!-- In case we want to repeat the header, remove "display: table-row-group" -->
+                                <thead style="display: table-row-group">
                                     <tr>
-                                        <td name="td_index"><span t-esc="index"/>.</td>
-                                        <td name="td_name"><span t-field="line.particular"/></td>
-                                        <td name="td_amount" class="text-center">
-                                            <span t-field="line.amount"/>
+                                        <!-- added header to display indexes -->
+                                        <th class="text-start">SL No</th>
+                                        <th class="text-start">Particulars</th>
+                                        <th class="text-start">Amount</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    <!-- added variable 'index' to increment index on each iteration -->
+                                    <t t-set="index" t-value="1"/>
+                                    <t t-foreach="o.fee_structure_lines" t-as="line">
+
+                                        <t t-if="line.amount == 0">
+                                            <tr>
+                                                <td colspan="3" class="text-center" name="td_name">
+                                                    <strong>
+                                                        <span t-field="line.name"/>
+                                                    </strong>
+                                                </td>
+                                            </tr>
+                                        </t>
+                                        <t t-if="line.amount != 0">
+                                            <tr>
+                                                <td name="td_index"><span t-esc="index"/>.
+                                                </td>
+                                                <td name="td_name">
+                                                    <span t-field="line.name"/>
+                                                </td>
+                                                <td name="td_amount" class="text-center">
+                                                    <span t-field="line.amount"/>
+                                                </td>
+                                            </tr>
+                                        </t>
+                                        <t t-set="index" t-value="index+1"/>
+                                    </t>
+                                    <tr>
+                                        <td></td>
+                                        <td name="td_name">
+                                            <span>
+                                                <b>Total</b>
+                                            </span>
+                                        </td>
+                                        <td name="td_total" class="text-center">
+                                            <b>
+                                                <span t-field="o.amount"/>
+                                            </b>
                                         </td>
                                     </tr>
-                                    <t t-set="index" t-value="index+1"/>
-                                </t>
-                                <tr>
-                                    <td></td>
-                                    <td name="td_name"><span><b>Total</b></span></td>
-                                    <td name="td_total" class="text-center">
-                                        <b><span t-field="o.amount"/></b>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="row" style="line-height: 2;">
-                        <p><b>Note:</b></p>
-                        <p>*Logic Admission fee and Tuition fee has to be paid to Logic Management Training Institutes Pvt. Ltd. Kochi. </p>
-                        <p>
-                            <span>Account Holder: LOGIC MANAGEMENT TRAINING INSTITUTES PVT LTD</span><br/>
-                            <span>Account number: 50200000093791</span><br/>
-                            <span>IFSC Code: HDFC0000510</span><br/>
-                            <span>Bank: HDFC</span><br/>
-                            <span>Place : BANERJI ROAD</span><br/>
-                        </p>
-                        <p>**Price of Study Material &amp; Software has to be paid to:</p>
-                        <p>
-                            <span>Account Holder Name : Venus Books</span><br/>
-                            <span>Account number: 0228073000001713</span><br/>
-                            <span>IFSC Code: SIBL0000228</span><br/>
-                            <span>Bank: South Indian Bank Ltd</span><br/>
-                            <span>Branch: Palarivattom</span><br/> 
-                        </p>
-                        <p>*** IMA Membership Fee, Entrance Fee and Exam Fee has to be paid directly to IMA, online or through credit card.</p>
-                        <p>***Actual amount may vary according to Foreign Exchange fluctuations.</p>
-                        <br/>
-                        <br/>
-                        <p>For Logic Management Training Institutes Pvt Ltd,</p>
-                        <p><span t-field="o.academic_head_name"/></p>
-                        <p>Academic Head</p>
-                    </div>
-                    <div class="mb-0 py-2"  style="min-height: 165px; margin-top:0px;">
-                        <img t-if="o.company_id.company_seal" t-att-src="image_data_uri(o.company_id.company_seal)"
-                            style="min-height:160px; max-height:160px; float:right;" alt="Logo" />
-                    </div>
+                                </tbody>
+                            </table>
+                            <br/>
+                            <p>
+                                <h4>NB: INR value may vary according to Foreign Exchange fluctuations</h4>
+                            </p>
+                        </div>
+                        <div class="row" style="line-height: 2;">
+                            <p>
+                                <b>Note:</b>
+                                <br/>
+                                <u>
+                                    <h2>FEE REMITTANCE DETAILS</h2>
+                                </u>
+                            </p>
+                            <p>
+                                <span>Account Holder: LOGIC MANAGEMENT TRAINING INSTITUTES PVT LTD</span>
+                                <br/>
+                                <span>Account number: 50200000093791</span>
+                                <br/>
+                                <span>IFSC Code: HDFC0000510</span>
+                                <br/>
+                                <span>Bank: HDFC</span>
+                                <br/>
+                                <span>Place : BANERJI ROAD</span>
+                                <br/>
+                            </p>
+                            <!--                            <p>**Price of Study Material &amp; Software has to be paid to:</p>-->
+                            <!--                            <p>-->
+                            <!--                                <span>Account Holder Name : Venus Books</span>-->
+                            <!--                                <br/>-->
+                            <!--                                <span>Account number: 0228073000001713</span>-->
+                            <!--                                <br/>-->
+                            <!--                                <span>IFSC Code: SIBL0000228</span>-->
+                            <!--                                <br/>-->
+                            <!--                                <span>Bank: South Indian Bank Ltd</span>-->
+                            <!--                                <br/>-->
+                            <!--                                <span>Branch: Palarivattom</span>-->
+                            <!--                                <br/>-->
+                            <!--                            </p>-->
+                            <!--                            <p>*** IMA Membership Fee, Entrance Fee and Exam Fee has to be paid directly to IMA, online-->
+                            <!--                                or through credit card.-->
+                            <!--                            </p>-->
+                            <p>Payment for enrolment at Amrita University will be processed directly through the student
+                                portal using the student's designated User ID and Password.
+                                <br/>
+                                <h3>By accepting this loan letter Mr./Ms
+                                    <span t-field="o.student_id"/>
+                                    D/O or S/O
+                                    <span t-field="o.father_name"/>agrees to attend tuition for
+                                    <span t-field="o.course_name"/>
+                                    at Logic School of Management Only.
+                                </h3>
+                            </p>
+
+                            <br/>
+                            <p>For Logic Management Training Institutes Pvt Ltd,
+                                <br/>
+                                <span t-field="o.academic_head_name"/>
+                                <br/>
+
+                                Academic Head
+                            </p>
+                        </div>
+                        <!--                        <div class="mb-0 py-2" style="min-height: 165px; margin-top:0px;">-->
+                        <!--                            <img t-if="o.company_id.company_seal" t-att-src="image_data_uri(o.company_id.company_seal)"-->
+                        <!--                                 style="min-height:160px; max-height:160px; float:right;" alt="Logo"/>-->
+                        <!--                        </div>-->
                     </div>
                 </t>
             </t>
@@ -126,8 +210,8 @@
         <field name="report_type">qweb-pdf</field>
         <field name="report_name">logic_loans.report_loan_letter</field>
         <field name="report_file">logic_loans.report_loan_letter</field>
-        <field name="paperformat_id" ref="logic_loans.paperformat_logic" />
+        <field name="paperformat_id" ref="logic_loans.paperformat_logic"/>
         <field name="print_report_name">'Loan Letter - %s' % (object.student_name)</field>
         <field name="binding_model_id" ref="model_loan_letter"/>
-     </record>
+    </record>
 </odoo>

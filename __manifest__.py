@@ -5,7 +5,9 @@
     'sequence': "0",
     'depends': ['base', 'logic_base','admission','faculty'],
     'data': [
+        'security/groups.xml',
         'security/ir.model.access.csv',
+        'security/rules.xml',
         'views/loan_letter_views.xml',
         'views/inherited_views.xml',
         'report/custom_paperformat.xml',

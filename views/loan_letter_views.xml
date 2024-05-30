@@ -11,12 +11,12 @@
               action="details_loan_letter_action"
               sequence="6"
               web_icon="logic_loans/static/description/icon.png"
-              />
+    />
     <menuitem name="Loan Letters" id="menu_loan_letter"
               action="details_loan_letter_action"
               parent="menu_loan_parent"
               sequence="1"
-              />
+    />
 
     <record id="loan_letter_tree_view" model="ir.ui.view">
         <field name="name">loan.letter.tree</field>
@@ -36,10 +36,15 @@
         <field name="type">form</field>
         <field name="arch" type="xml">
             <form string="Exam">
+                <header>
+                    <button name="action_print_section" string="Print" type="object" class="oe_highlight"/>
+                </header>
                 <sheet>
                     <group>
                         <group>
-                            <h3><u>Body</u></h3>
+                            <h3>
+                                <u>Body</u>
+                            </h3>
                             <field name="currency_id" invisible="1"/>
                             <field name="academic_head_id"/>
                             <field name="academic_head_name"/>
@@ -48,26 +53,36 @@
                             <field name="title"/>
                             <field name="address"/>
                             <field name="father_name"/>
-                        <!-- </group>
-                        <group> -->
+                            <!-- </group>
+                            <group> -->
                             <field name="course_name"/>
                             <field name="course_body"/>
                             <field name="course_abbrv"/>
                         </group>
                         <group>
-                            <h3><u>Header</u></h3>
+                            <h3>
+                                <u>Header</u>
+                            </h3>
                             <field name="location"/>
-                            <field name="date"/> 
+                            <field name="date"/>
                         </group>
                     </group>
                     <group>
                         <notebook>
                             <page string="Fee Structure">
-                                <field name="fee_structure_lines">
+                                <field name="fee_structure_lines" widget="section_and_note_one2many">
+
                                     <tree editable="bottom">
+                                        <control>
+                                            <create name="add_line_control" string="Add a line"/>
+                                            <create name="add_section_control" string="Add a section"
+                                                    context="{'default_display_type': 'line_section'}"/>
+                                        </control>
                                         <field name="currency_id" invisible="1"/>
-                                        <field name="particular"/>
-                                        <field name="amount"/>
+                                        <field name="name" widget="section_and_note_text" optional="show"/>
+<!--                                        <field name="particular"/>-->
+                                        <field name="display_type" invisible="1"/>
+                                        <field name="amount" />
                                     </tree>
                                 </field>
                                 <group name="note_group" col="6" class="mt-2 mt-md-0">
@@ -75,7 +90,8 @@
                                         <div class="oe_subtotal_footer_separator oe_inline o_td_label">
                                             <label for="amount"/>
                                         </div>
-                                        <field name="amount" nolabel="1" class="oe_subtotal_footer_separator" widget="monetary"/>
+                                        <field name="amount" nolabel="1" class="oe_subtotal_footer_separator"
+                                               widget="monetary"/>
                                     </group>
                                     <div class="oe_clear"/>
                                 </group>

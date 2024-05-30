@@ -1,4 +1,6 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 
-access_loan_letter,access_loan_letter,model_loan_letter,base.group_user,1,1,1,1
-access_fee_structure,access_fee_structure,model_loan_fee_structure_line,base.group_user,1,1,1,1
+access_loan_letter,access_loan_letter,model_loan_letter,logic_loans.logic_loan_admin,1,1,1,1
+access_fee_structure,access_fee_structure,model_loan_fee_structure_line,logic_loans.logic_loan_admin,1,1,1,1
+access_loan_letter_coordinator,access_loan_letter,model_loan_letter,logic_loans.logic_loan_coordinators,1,1,1,1
+access_fee_structure_coordinator,access_fee_structure,model_loan_fee_structure_line,logic_loans.logic_loan_coordinators,1,1,1,1
