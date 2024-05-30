@@ -36,9 +36,7 @@
         <field name="type">form</field>
         <field name="arch" type="xml">
             <form string="Exam">
-                <header>
-                    <button name="action_print_section" string="Print" type="object" class="oe_highlight"/>
-                </header>
+               
                 <sheet>
                     <group>
                         <group>
@@ -47,9 +45,9 @@
                             </h3>
                             <field name="currency_id" invisible="1"/>
                             <field name="academic_head_id"/>
-                            <field name="academic_head_name"/>
+                            <field name="academic_head_name" invisible="1"/>
                             <field name="student_id"/>
-                            <field name="student_name"/>
+                            <field name="student_name" invisible="1"/>
                             <field name="title"/>
                             <field name="address"/>
                             <field name="father_name"/>
